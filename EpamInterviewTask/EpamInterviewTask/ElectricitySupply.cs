@@ -33,6 +33,27 @@ namespace EpamInterviewTask
             Array.Sort(clients, comparer);
         }
 
+        //Общая сумма платежей всех клиентов
+        public void TotalAmount()
+        {
+            foreach (Client item in clients)
+            {
+                SUM += item.Payment;
+            }
+        }
+
+        //Общий размер льготы
+        public void TotalBenifits()
+        {
+            decimal sum0 = 0.0m;
+            foreach (Client item in clients)
+            {
+                sum0 += item.ElEnergy * Client.Tariff;
+            }
+            LG = sum0 - SUM;
+        }
+
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return clients.GetEnumerator();
