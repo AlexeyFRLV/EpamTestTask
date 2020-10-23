@@ -8,12 +8,21 @@ namespace EpamInterviewTask
     }
 
 
-    class Client : Human
+    class Client : Human, IComparable
     {
         public int ElEnergy { get; set; }                                               //количество потребленной эл. энергии клиентом
         public TypeOfClient Status { get; set; }                                        //тип клиента
         public decimal Payment { get; set; }                                            //сумма платежа
         public static decimal Tariff { get; set; }                                      //тариф на эл. энергию
+
+        //сортировка клиентов по количеству потребленной эл. энергии в порядке убывания
+        public int CompareTo(object obj)
+        {
+            if (obj is Client)
+                return ~ElEnergy.CompareTo((obj as Client).ElEnergy);                   // '-' нужен для того, чтобы сортировать по убыванию
+            throw new NotImplementedException();
+        }
+
 
         //Конвертирование перечислимого типа в строку для вывода типа клиентов
         public string ConvertStatus()
